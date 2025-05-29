@@ -40,11 +40,3 @@ with open('db.json','w') as file:
 
 
 
-
-
-'hello world'
-
-
-
-'hi'
-
