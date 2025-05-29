@@ -38,3 +38,13 @@ with open('db.json','w') as file:
 # with open('db.json','w') as file:
 #     json.dump(from_list,file)
 
+
+
+
+
+'hello world'
+
+
+
+'hi'
+
