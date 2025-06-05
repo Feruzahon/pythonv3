@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "title": "nuke",
+    "price": 350
+  },
+  {
+    "id": 2,
+    "title": "iphon 13Pro",
+    "price": 2000
+  },
+  {
+    "id": 3,
+    "title": "adidas",
+    "price": 250
+  },
+  {
+    "id": 4,
+    "title": "toyota",
+    "price": 7000
+  }
+]

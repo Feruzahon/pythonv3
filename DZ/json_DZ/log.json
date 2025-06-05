@@ -1,0 +1,7 @@
+[
+    {
+        "timestamp": "2025-03-10 12:30:45",
+        "event": "User logged in",
+        "user_id": 123
+    }
+]
