@@ -1,0 +1,73 @@
+HTTP-протокол , для передачи данных
+HTTPS- это более защищенная версия HTTP(появляяется шифрования и SSLсертификат)
+
+HTTP- hyper text transfer protocol
+
+HTTP Methods: CRUD
+POST- ОТПРАВКИ ДАННЫХ НА СОЗДАНИЕ
+GET -получение данных 
+PUT - полная обновления или создание нового 
+PATCH - Частичное обновление 
+DELETE- удаление
+
+Выспомогательные методы
+HEAD - получение Headers(заголовки)
+OPTIONS -получение списка допустимых методов для этой url
+TRACE- трассировка (проверка связи)
+
+
+HTTP status code:
+1xx -информационные
+2хх - успешные
+3хх - перенаправление
+4хх - ошибка на стороне клиента (front-end)
+5xx - ошибка на стороне сервера (backend)
+
+
+URL - uniform resource locator
+(https://www.google.com/search/car/?q=bmw)
+
+протокол:
+'https:'
+
+DOMAIN- уникальное название сайта
+'www.google.com'
+домен делится на три уровня: --------
+
+URI - кусочек URL идет всегда после домена
+'search/car/'
+
+Query parameters- пара (ключом - значением) который идет после вопросительного знака
+'?q=bnw'
+
+HOST - адрес на который мы отправляем запрос (ip address / domain)
+'127.0.0.1'- локальный хост
+
+PORT - номер сервиса в сервере (http-servar:8000),(postgresql:5432)(frontend:3000)
+
+
+
+https://www.example.com:8080/path/to/resource?param1=value1&param2=value2#section
+
+#section-лакарь сайта
+
+
+request:
+http://www.shopapi.com/product/create - продукт создаем
+POST
+JSON -> {"title": "nike", "price": 1000}
+
+response:
+status_code: 201
+json -> {"msg": "Вы успешно добавили товар!"}
+
+
+http://www.shopapi.com/product/delete/1/ - продукт удалится по указанному айди
+DELETE
+
+http://www.shopapi.com/all_products/
+GET - получаем данные
+
+http://www.shopapi.com/product/2/
+GET - 2 информацие об этом индексе
+

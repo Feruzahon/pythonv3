@@ -1,0 +1,65 @@
+'-----------Агрегатные функции--------------'
+SUM -  функция, считающая сумму всех записей в сгруппированном поле
+
+
+-----создаем таблисы--------
+CREATE TABLE customer (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+CREATE TABLE product (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(50),
+    price DECIMAL
+);
+
+CREATE TABLE cart (
+    id SERIAL PRIMARY KEY,
+    customer_id INT,
+    product_id INT,
+
+    CONSTRAINT cart_customer FOREIGN KEY (customer_id) REFERENCES customer (id), 
+    CONSTRAINT cart_product FOREIGN KEY (product_id) REFERENCES product (id)
+);
+
+-------заполняем таблицу --------
+
+INSERT INTO customer (name) VALUES ('customer 1'), ('customer 2'), ('customer 3'); 
+
+INSERT INTO product (title, price) VALUES
+('product 1', 340),
+('product 2', 503),
+('product 3', 470),
+('product 4', 236),
+('product 5', 452);
+
+INSERT INTO cart (customer_id, product_id) VALUES
+(1, 1), (1, 2), (1, 4),
+(2, 3),
+(3, 4), (3, 5);
+
+-------выведет ответ ---
+SELECT customer.name, SUM(product.price) AS total_price 
+FROM 
+product JOIN cart ON product.id = cart.product_id
+JOIN customer ON customer.id = cart.customer_id 
+GROUP BY (customer.name);
+
+
+
+ARRAY_AGG -обьядиняет записи сгруппированного поля в массив 
+
+SELECT author.name, ARRAY_AGG(book.title) AS books
+FROM
+author JOIN book ON author.id = book.author_id
+GROUP BY (author.name);
+  name   |   books    
+---------+------------
+ Author2 | {AAAA}
+ Author1 | {BBBB,CCC}
+ Author3 | {DDD}
+(3 rows)
+
+
+-------------------

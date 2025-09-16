@@ -1,0 +1,167 @@
+'------  Установка------='
+ubuntu: 
+sudo apt install postgresql
+
+mac:
+
+brew install postgresql
+
+-----Настройка ------
+name -> меняете на название вашего пользователя ноутбука, у меня это feruza
+
+CREATE USER feruza WITH PASSWORD '1';
+ALTER ROLE feruza WITH SUPERUSER CREATEDB CREATEROLE REPLICATION BYPASSRLS;
+CREATE DATABASE feruza WITH OWNER feruza;
+
+
+CREATE USER feruza WITH PASSWORD '1';
+ALTER ROLE feruza WITH SUPERUSER CREATEDB CREATEROLE REPLICATION BYPASSRLS;
+CREATE DATABASE feruza WITH OWNER feruza;
+
+
+CREATE DATABASE blog_db; - создание базы данных
+
+CREATE TABLE posts (  
+    id SERIAL PRIMARY KEY,
+    description VARCHAR(1000),
+); - создание таблицы с полями
+
+INSERT INTO posts VALUES 
+(1, 'hello world'), (2, 'bday'); - добавление данных в таблицу
+ 
+DROP TABLE posts; - удаление таблицы 
+
+DELETE FROM posts; - очищаем таблицу 
+
+DELETE FROM posts WHERE id = 2; - удаляем запись под id два, при помощи условия WHERE
+
+DELETE FROM posts WHERE title LIKE '%World%';
+
+DELETE FROM posts WHERE title ILIKE '%World%';
+
+SELECT * FROM posts; 
+
+SELECT * FROM products WHERE price > 1000;
+
+SELECT * FROM products WHERE description ILIKE '%Правильное питание%';
+
+SELECT * FROM products LIMIT 4; 
+
+SELECT * FROM products OFFSET 4;
+
+'---------------Связи между таблицами -------------'
+pk, fk
+
+pk- primari key - первичный ключ, ограниченние, которое накладывается на поле , которое будет использоваться в связи 
+(создает ,btree для быстрого поиска)
+
+fk-foreign key - внешний ключ, ограничение, которое накладывается на поле, которое ссылается на pkв другой таблицы
+
+'---------one to one -связь-----'
+CREATE TABLE author (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE book(
+    id SERIAL PRIMARY KEY,
+    title  VARCHAR(100),
+
+    author_id   INT UNIQUE,
+    CONSTRAINT fk_book_aothor FOREIGN KEY(author_id)
+    REFERENCES author (id)
+);
+
+'----------one to many------------'
+CREATE TABLE author (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE book(
+    id SERIAL PRIMARY KEY,
+    title  VARCHAR(100),
+
+    author_id   INT,
+    CONSTRAINT fk_book_aothor FOREIGN KEY(author_id)
+    REFERENCES author (id)
+);
+
+'--------many to many -----'
+CREATE TABLE author (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE book(
+    id SERIAL PRIMARY KEY,
+    title  VARCHAR(100)
+);
+
+CREATE TABLE author_book(
+    author_id INT,
+    book_id INT,
+
+    CONSTRAINT fk_author FOREIGN KEY 
+    (author_id) REFERENCES author(id),
+
+    CONSTRAINT fk_book FOREIGN KEY
+    (book_id) REFERENCES book (id)
+)
+
+
+#  author_id   INT UNIQUE-это даст нам о том что даст связь one to one
+
+INSERT INTO author (name) VALUES
+('Author1'),('Author2'),('Author3'),('Author4'); 
+
+INSERT INTO book (title) VALUES
+('AAAA'),('BBBB'),('CCC');
+
+INSERT INTO author_book(author_id,book_id) VALUES
+(3,1),(3,2),(4,1),(1,3);
+
+#One to many -один ко многим именно этот связь использовали
+
+'----------------види Связи--------------------'
+#One to one - один к одному
+один человек - один ID 
+один человек - одно лицо
+
+#One to many -один ко многим
+один блогер - много постов
+один куратор- много студенты
+один продукт- много коментариев
+
+#Many to many - многа ко многим
+один ментр - много студентов, один студент - много менторов
+один разработчик - много проектов, один проект - много разработчик
+один банк - много клинтов, один клиент - много банков
+#
+#
+
+-------------------------------------------
+
+-17.07.2025-------------------------------
+
+CREATE TABLE author (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE book(
+    id SERIAL PRIMARY KEY,
+    title  VARCHAR(100),
+
+    author_id   INT,
+    CONSTRAINT fk_book_aothor FOREIGN KEY(author_id)
+    REFERENCES author (id)
+);
+
+INSERT INTO author (name) VALUES
+('Author1'),('Author2'),('Author3'),('Author4'); 
+
+INSERT INTO book (title,author_id) VALUES
+('AAAA',2),('BBBB',1),('CCC',1),('DDD',3);
+дальше можно увидеть в другом документе
+
